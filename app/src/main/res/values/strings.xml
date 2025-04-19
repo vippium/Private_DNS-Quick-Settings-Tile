@@ -12,6 +12,7 @@
     <string name="set_dns_auto">Set Private DNS to Auto</string>
     <string name="set_dns_on">Set Private DNS to On</string>
     <string name="require_unlock">Require device to be unlocked to toggle tile</string>
+    <string name="hide_launcher">Hide launcher icon</string>
     <string name="dns_modes_to_toggle">DNS modes to toggle</string>
     <string name="other_settings">Other settings</string>
     <string name="toast_no_permission">WRITE_SECURE_SETTINGS permission not granted</string>

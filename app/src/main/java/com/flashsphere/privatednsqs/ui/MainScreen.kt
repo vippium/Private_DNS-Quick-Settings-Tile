@@ -132,7 +132,9 @@ fun MainScreen(
         onDnsOnClick = viewModel::dnsOnChecked,
         dnsHostnameTextFieldState = viewModel.dnsHostnameTextFieldState,
         requireUnlockStateFlow = viewModel.requireUnlockChecked,
+        hideLauncherStateFlow = viewModel.hideLauncherChecked,
         onRequireUnlockClick = viewModel::requireUnlockChecked,
+        onHideLauncherClick = viewModel::hideLauncherChecked,
         dnsHostnameFlow = viewModel.dnsHostname,
         onSaveClick = viewModel::save,
         showAppInfo = showAppInfo,
@@ -155,7 +157,9 @@ private fun MainScreen(
     dnsHostnameTextFieldState: TextFieldState,
     dnsHostnameFlow: StateFlow<String>,
     requireUnlockStateFlow: StateFlow<Boolean>,
+    hideLauncherStateFlow: StateFlow<Boolean>,
     onRequireUnlockClick: (checked: Boolean) -> Unit,
+    onHideLauncherClick: (checked: Boolean) -> Unit,
     onSaveClick: () -> Unit,
     showAppInfo: () -> Unit,
     showMoreInfo: () -> Unit,
@@ -298,6 +302,8 @@ private fun MainScreen(
                 Header(stringResource(R.string.other_settings))
 
                 CheckBoxWithLabel(requireUnlockStateFlow, onRequireUnlockClick, stringResource(R.string.require_unlock))
+
+                CheckBoxWithLabel(hideLauncherStateFlow, onHideLauncherClick, stringResource(R.string.hide_launcher))
 
                 Button(
                     onClick = {
@@ -532,7 +538,9 @@ private fun MainScreenPreview() {
         dnsHostnameTextFieldState = dnsHostnameTextFieldState,
         dnsHostnameFlow = dnsHostnameFlow,
         requireUnlockStateFlow = requireUnlock,
+        hideLauncherStateFlow = requireUnlock,
         onRequireUnlockClick = { requireUnlock.value = it },
+        onHideLauncherClick = { requireUnlock.value = it },
         onSaveClick = { dnsHostnameFlow.value = dnsHostnameTextFieldState.text.toString() },
         showAppInfo = {},
         showMoreInfo = {},

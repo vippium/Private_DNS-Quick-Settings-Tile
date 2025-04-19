@@ -170,7 +170,8 @@ class MainActivity : BaseActivity(), OnRequestPermissionResultListener {
                 getIntent(context, message), FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT)
 
         fun getIntent(context: Context, message: SnackbarMessage): Intent =
-            Intent(context, MainActivity::class.java)
+            Intent()
+                .setComponent(ComponentName(context, MainActivity::class.java.name + "Alias"))
                 .addFlags(FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
                 .putExtra(PARAM_BUNDLE, Bundle().also {
                     it.putParcelable(PARAM_MESSAGE, message)

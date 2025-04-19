@@ -1,5 +1,7 @@
 package com.flashsphere.privatednsqs.viewmodel
 
+import android.content.ComponentName
+import android.content.pm.PackageManager
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
 import androidx.lifecycle.ViewModel
@@ -8,11 +10,13 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.flashsphere.privatednsqs.PrivateDnsApplication
+import com.flashsphere.privatednsqs.activity.MainActivity
 import com.flashsphere.privatednsqs.datastore.PrivateDns
 import com.flashsphere.privatednsqs.datastore.dataStore
 import com.flashsphere.privatednsqs.datastore.dnsAutoToggle
 import com.flashsphere.privatednsqs.datastore.dnsOffToggle
 import com.flashsphere.privatednsqs.datastore.dnsOnToggle
+import com.flashsphere.privatednsqs.datastore.hideLauncher
 import com.flashsphere.privatednsqs.datastore.requireUnlock
 import com.flashsphere.privatednsqs.ui.ChangesSavedMessage
 import com.flashsphere.privatednsqs.ui.NoDnsHostnameMessage
@@ -30,6 +34,8 @@ class MainViewModel(
     application: PrivateDnsApplication,
 ) : ViewModel() {
     private val dataStore = application.dataStore
+    private val packageManager = application.packageManager
+    private val launcherActivityComponent = ComponentName(application, MainActivity::class.java)
     private val privateDns = PrivateDns(application)
 
     private val _snackbarMessages = MutableSharedFlow<SnackbarMessage>(
@@ -50,6 +56,9 @@ class MainViewModel(
 
     private val _requireUnlockChecked = MutableStateFlow(dataStore.requireUnlock())
     val requireUnlockChecked = _requireUnlockChecked.asStateFlow()
+
+    private val _hideLauncherChecked = MutableStateFlow(dataStore.hideLauncher())
+    val hideLauncherChecked = _hideLauncherChecked.asStateFlow()
 
     private val _dnsHostname = MutableStateFlow(privateDns.getHostname() ?: "")
     val dnsHostname = _dnsHostname.asStateFlow()
@@ -82,6 +91,24 @@ class MainViewModel(
     fun requireUnlockChecked(checked: Boolean) {
         _requireUnlockChecked.value = checked
         dataStore.requireUnlock(checked)
+    }
+    fun hideLauncherChecked(checked: Boolean) {
+        _hideLauncherChecked.value = checked
+        dataStore.hideLauncher(checked)
+
+        if (checked) {
+            packageManager.setComponentEnabledSetting(
+                launcherActivityComponent,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        } else {
+            packageManager.setComponentEnabledSetting(
+                launcherActivityComponent,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        }
     }
     fun showSnackbarMessage(message: SnackbarMessage) {
         viewModelScope.launch {

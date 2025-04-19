@@ -12,6 +12,7 @@ object PreferenceKeys {
     val DNS_AUTO_TOGGLE = PreferenceKey(booleanPreferencesKey("toggle_auto"), true)
     val DNS_ON_TOGGLE = PreferenceKey(booleanPreferencesKey("toggle_on"), true)
     val REQUIRE_UNLOCK = PreferenceKey(booleanPreferencesKey("require_unlock"), false)
+    val HIDE_LAUNCHER = PreferenceKey(booleanPreferencesKey("hide_launcher"), false)
 
     @Deprecated("Not used since migrating to datastore")
     val FIRST_RUN = booleanPreferencesKey("first_run")

@@ -23,7 +23,6 @@
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -31,6 +30,18 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+
+        <activity-alias
+            android:name=".activity.MainActivityAlias"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:targetActivity=".activity.MainActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
 
         <activity
             android:name=".activity.DnsOffActivity"

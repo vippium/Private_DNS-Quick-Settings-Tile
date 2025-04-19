@@ -64,3 +64,10 @@ fun DataStore<Preferences>.requireUnlock(): Boolean {
 fun DataStore<Preferences>.requireUnlock(value: Boolean) {
     return updateBlocking(PreferenceKeys.REQUIRE_UNLOCK, value)
 }
+
+fun DataStore<Preferences>.hideLauncher(): Boolean {
+    return getBlocking(PreferenceKeys.HIDE_LAUNCHER)
+}
+fun DataStore<Preferences>.hideLauncher(value: Boolean) {
+    return updateBlocking(PreferenceKeys.HIDE_LAUNCHER, value)
+}
