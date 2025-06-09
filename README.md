@@ -26,7 +26,7 @@ Check out https://private-dns-qs.web.app/help on how to use `adb` to grant the p
 ## About this Fork
 This fork introduces a small but useful enhancement: the ability to hide the launcher activity, effectively removing the app icon from the app drawer. This is helpful for users who prefer a cleaner app list or consider the app icon unnecessary once the tile has been added to Quick Settings.
 
-🔒 Hide Launcher Activity: Removes the app icon from the launcher to reduce clutter. The functionality of the Quick Settings tile remains unaffected.
+🔒 **Hide Launcher Activity**: Removes the app icon from the launcher to reduce clutter. The functionality of the Quick Settings tile remains unaffected.
 
 ✅ All core features from the original repository are preserved.
 
