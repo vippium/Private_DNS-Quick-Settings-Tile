@@ -1,3 +1,6 @@
+# THE REPOSITORY IS NO LONGER NEEDED AS THE DEVELOPER ITSELF ADDED `NO LAUNCHER` BUILD IN RELEASES ON MY CALL.
+
+
 # Private DNS Quick Setting
  
 Toggle and configure your Private DNS settings on Android 9+ from the comfort of your quick settings panel.
